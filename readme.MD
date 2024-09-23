@@ -1010,3 +1010,36 @@ Let's break down the **data ingestion** and **querying** process into a sequence
 The **embedchain** project operates by embedding data and queries into high-dimensional vectors using machine learning models and storing these embeddings in a vector database. When a query is made, it is converted into an embedding, and the system performs a similarity search in the vector store to retrieve the most relevant data. The sequence diagrams provided illustrate how data is ingested and queried within this system.
 
 Would you like more information on a particular part of the system, such as the embedding models used or how vector search works in more detail?
+
++-----------------+    +------------+    +------------+    +------------+    +----------+
+|    User Input   |    |   Memory   |    | Embedding  |    |  Vector    |    |   LLM    |
+|      (User)     |    | Retrieval  |    | Generation |    |  Store     |    | (Model)  |
++-----------------+    +------------+    +------------+    +------------+    +----------+
+        |                      |                  |                 |                |
+        | 1. Input Query        |                  |                 |                |
+        |--------------------->|                  |                 |                |
+        |                      | 2. Retrieve Docs |                 |                |
+        |                      |----------------->|                 |                |
+        |                      |                  | 3. Generate     |                |
+        |                      |                  |    Embedding    |                |
+        |                      |                  |<----------------|                |
+        |                      |                  |                 | 4. Store/Query |
+        |                      |                  |                 |    Embedding   |
+        |                      |                  |                 |<---------------|
+        |                      |                  |                 | 5. Retrieve    |
+        |                      |                  |                 |    Similar     |
+        |                      |                  |                 |    Embeddings  |
+        |                      |                  |                 |--------------->|
+        |                      |                  |                 | 6. Return      |
+        |                      |                  |                 |    Embeddings  |
+        |                      |                  |<----------------|                |
+        |                      |                  |                 |                |
+        |                      | 7. Pass Query +  |                 |                |
+        |                      |    Embeddings    |                 |                |
+        |                      |----------------->|                 |                |
+        |                      |                  | 8. Generate     |                |
+        |                      |                  |    Response     |                |
+        |                      |                  |---------------->|                |
+        |                      | 9. Return Result |                 |                |
+        |<----------------------|                 |                 |                |
++-----------------+    +------------+    +------------+    +------------+    +----------+
